@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./home.module.css"
 import { BsSearch } from "react-icons/bs";
 import {Rating} from "@mui/material"
+import { Link } from "react-router-dom";
 
 const API_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzMzU5MDE4NTBlYTYzMGE4Y2RkZmIyYjU3M2M5MjBmZiIsInN1YiI6IjY2NDhiNTVkYTBmNzE0NGU0NDkyNTZjZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Kfvpp9RCd-x6hrX8QlGgbqgOyyFRF7psvKsrpLGdiSk"
 
@@ -31,10 +32,12 @@ interface DataProps {
 export function Home() {
 
   const [movies,setMovies] = useState<MovieProps[]>();
+  const [page,setPage] = useState(1);
 
   useEffect(() => {
     getData()
-  })
+  },[page])
+
 
   function formatDate(date:string) {
     const newData = new Date(date)
@@ -42,7 +45,7 @@ export function Home() {
   }
 
   async function getData() {
-    fetch("https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc",{
+    fetch(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc`,{
       method:"get",
        headers: {
         'Content-type': 'application/json',
@@ -50,7 +53,22 @@ export function Home() {
     },
     })
     .then((res) => res.json())
-    .then((data : DataProps) => setMovies(data.results))
+    .then((data : DataProps) => {
+      if (page === 1) {setMovies(data.results)}
+      else {
+        const newArr = [...(movies as MovieProps[])]
+        console.log(newArr)
+        const newItems = data.results;
+        const result = newArr.concat(newItems);
+        setMovies(result);
+      }
+    }
+  )
+  }
+
+  function handleMoreMovies(e: React.MouseEvent){
+    e.preventDefault()
+    setPage(page + 1)
   }
 
   return (
@@ -63,8 +81,10 @@ export function Home() {
       </form>
 
       <div className={styles.movie_container}>
-        {movies ? movies.map((movie) => (
-          <div key={movie.id} className={styles.movie_item}>
+        {movies ? movies.map((movie,index) => (
+          
+          <Link key={index} to={`/detail/:${movie.id}`}>
+          <div className={styles.movie_item}>
               <img className={styles.movie_poster} src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`} alt=""/>
               <div className={styles.movie_info}>
                 <div className={styles.container_title}>
@@ -74,8 +94,13 @@ export function Home() {
                 <p>Data de lançamento: {formatDate(movie.release_date)}</p>
               </div>
           </div>
+          </Link>
         )) : <p>carregando...</p>}
+
       </div>
+       <div className={styles.container_more_btn}>
+        <a href="" className={styles.more_btn} onClick={handleMoreMovies}>Mostrar mais</a>
+       </div>
     </main>
   )
 }
