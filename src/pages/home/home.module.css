@@ -3,6 +3,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 100%;
 }
 .form {
     width: 100%;
@@ -27,10 +28,25 @@
     background: transparent;
 }
 
+.movie_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
 .movie_container {
     display: grid;
     width: 100%;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+.container_loading {
+    display: flex;
+    flex-grow: 1;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-top: 200px;
 }
 
 .movie_item {

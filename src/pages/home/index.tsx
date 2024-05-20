@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./home.module.css"
 import { BsSearch } from "react-icons/bs";
-import {Rating} from "@mui/material"
+import {CircularProgress, Rating} from "@mui/material"
 import { Link } from "react-router-dom";
 
 const API_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzMzU5MDE4NTBlYTYzMGE4Y2RkZmIyYjU3M2M5MjBmZiIsInN1YiI6IjY2NDhiNTVkYTBmNzE0NGU0NDkyNTZjZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Kfvpp9RCd-x6hrX8QlGgbqgOyyFRF7psvKsrpLGdiSk"
@@ -80,10 +80,11 @@ export function Home() {
         </button>
       </form>
 
+      {movies ? 
       <div className={styles.movie_container}>
-        {movies ? movies.map((movie,index) => (
+        {movies && movies.map((movie,index) => (
           
-          <Link key={index} to={`/detail/:${movie.id}`}>
+          <Link key={index} to={`/detail/${movie.id}`}>
           <div className={styles.movie_item}>
               <img className={styles.movie_poster} src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`} alt=""/>
               <div className={styles.movie_info}>
@@ -95,12 +96,16 @@ export function Home() {
               </div>
           </div>
           </Link>
-        )) : <p>carregando...</p>}
+        ))}
+      </div> : 
+        <div className={styles.container_loading}>
+          <CircularProgress/>
+        </div>}
 
-      </div>
-       <div className={styles.container_more_btn}>
+      
+       {movies && <div className={styles.container_more_btn}>
         <a href="" className={styles.more_btn} onClick={handleMoreMovies}>Mostrar mais</a>
-       </div>
+       </div>}
     </main>
   )
 }
