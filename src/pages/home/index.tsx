@@ -87,7 +87,7 @@ export function Home() {
           
           <Link key={index} to={`/detail/${movie.id}`}>
           <div className={styles.movie_item}>
-              <img className={styles.movie_poster} src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`} alt=""/>
+              <img className={styles.movie_poster} src={`https://image.tmdb.org/t/p/w342/${movie.poster_path}`} alt=""/>
               <div className={styles.movie_info}>
                 <div className={styles.container_title}>
                  <h3>{movie.title}</h3>

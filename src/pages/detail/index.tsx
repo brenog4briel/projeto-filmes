@@ -67,8 +67,8 @@ interface MovieDetailsProps {
 
 
 export function Detail() {
-  let param = useParams();
-  let id = Number(param.movieid)
+  const param = useParams();
+  const id = Number(param.movieid)
   const navigate = useNavigate();
   const [movieInfo,ssetMovieInfo] = useState<MovieDetailsProps>()
 
@@ -107,7 +107,7 @@ export function Detail() {
           <h1>{movieInfo.title}</h1>
 
 
-          <table width="100%">
+          <table className={styles.table}>
             <tr>
               <th>Sinopse:</th>
               <td>{movieInfo.overview}</td>
@@ -146,7 +146,9 @@ export function Detail() {
       }
 
       {!movieInfo &&  <div className={styles.container_loading}>
+          <div className={styles.container_loading}>
           <CircularProgress />
+        </div>
       </div>}
 
      
