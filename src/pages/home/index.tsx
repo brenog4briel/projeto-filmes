@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./home.module.css"
 import { BsSearch } from "react-icons/bs";
 import {CircularProgress, Rating} from "@mui/material"
+import StarIcon from '@mui/icons-material/Star';
 import { Link } from "react-router-dom";
 
 const API_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzMzU5MDE4NTBlYTYzMGE4Y2RkZmIyYjU3M2M5MjBmZiIsInN1YiI6IjY2NDhiNTVkYTBmNzE0NGU0NDkyNTZjZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Kfvpp9RCd-x6hrX8QlGgbqgOyyFRF7psvKsrpLGdiSk"
@@ -90,7 +91,7 @@ export function Home() {
               <div className={styles.movie_info}>
                 <div className={styles.container_title}>
                  <h3>{movie.title}</h3>
-                 <Rating defaultValue={Math.round(movie.vote_average)} precision={1} max={10} readOnly/>
+                 <Rating defaultValue={Math.round(movie.vote_average)} precision={1} max={10} readOnly emptyIcon={<StarIcon style={{color:"#4F4F4F"}}/>}  />
                 </div>
                 <p>Data de lançamento: {formatDate(movie.release_date)}</p>
               </div>
@@ -99,7 +100,7 @@ export function Home() {
         ))}
       </div> : 
         <div className={styles.container_loading}>
-          <CircularProgress/>
+          <CircularProgress />
         </div>}
 
       
