@@ -15,24 +15,22 @@
 }
 
 .form input {
-    width: 80%;
+    width: 90%;
     height: 35px;
     outline: none;
     border: none;
     border-radius: 4px;
     padding: 0 8px;
-    
 }   
 
-.form button {
-    background: transparent;
-}
+
 
 .movie_container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     padding: 15px;
     gap: 25px;
+    width: 100%;
 }
 .container_loading {
     display: flex;
@@ -120,7 +118,7 @@
     }
 
     .movie_item {
-        width: 100%;
+        width: 80%;
         height: 600px;
         margin: 10px auto;
     }
@@ -132,7 +130,7 @@
  }
 
  /* Medium devices (tablets, 768px and up) */
-@media (576px < width <= 768px) {  
+@media (576px < width <= 800px) {  
     .movie_container {
         grid-template-columns: 1fr 1fr;
     }
@@ -144,9 +142,10 @@
 }
 
  /* Large devices (desktops, 992px and up) */
-@media (768px < width <= 1200px) { 
+@media (800px < width <= 1200px) { 
     .movie_container {
         grid-template-columns: 1fr 1fr 1fr;
+        gap: 10px;
     }
     .more_btn {
         width: 15%;

@@ -108,6 +108,8 @@ export function Detail() {
 
 
           <table className={styles.table}>
+            <tbody>
+
             <tr>
               <th>Sinopse:</th>
               <td>{movieInfo.overview}</td>
@@ -115,8 +117,8 @@ export function Detail() {
             <tr>
               <th>Gênero(s):</th>
               <td> 
-                {movieInfo.genres.map((genre) => (
-                  <p>{genre.name}</p>
+                {movieInfo.genres.map((genre,index) => (
+                  <p key={index}>{genre.name}</p>
                 ))}
               </td>
             </tr>
@@ -127,19 +129,20 @@ export function Detail() {
             <tr>
               <th>Produtoras:</th>
               <td>
-                {movieInfo.production_companies.map((companies) => (
-                <p>{companies.name}</p>
+                {movieInfo.production_companies.map((companies,index) => (
+                <p key={index}>{companies.name}</p>
                 ))}
               </td>
             </tr>
             <tr>
               <th>País de origem:</th>
               <td>
-                {movieInfo.production_countries.map((country) => (
-                <p>{country.name}</p>
+                {movieInfo.production_countries.map((country,index) => (
+                <p key={index}>{country.name}</p>
                 ))}
               </td>
             </tr>
+            </tbody>
           </table>
         </div>
       </div>

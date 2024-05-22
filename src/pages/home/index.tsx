@@ -33,6 +33,10 @@ interface DataProps {
 export function Home() {
 
   const [movies,setMovies] = useState<MovieProps[]>();
+  const [searchString, setSearchString] = useState<string>("");
+  const [searchValue,setSearchValue] = useState<string>("")
+  const [filteredMovies,setFilteredMovies] = useState<MovieProps[]>();
+
   const [page,setPage] = useState(1);
 
   useEffect(() => {
@@ -55,7 +59,7 @@ export function Home() {
     })
     .then((res) => res.json())
     .then((data : DataProps) => {
-      if (page === 1) {setMovies(data.results)}
+      if (page === 1) {setMovies(data.results);}
       else {
         const newArr = [...(movies as MovieProps[])]
         console.log(newArr)
@@ -72,18 +76,22 @@ export function Home() {
     setPage(page + 1)
   }
 
+  const filteredData = movies?.filter((x) => {
+    return (
+      x.title.toLowerCase().includes(searchString.toLowerCase()) ||
+      x.title.includes(searchString)
+    );
+  });
+
   return (
     <main className={styles.container}>
       <form className={styles.form} action="">
-        <input type="search" name="" id="" placeholder="Digite o nome de filme que deseja procurar"/>
-        <button type="button" onClick={() => formatDate("2024-01-18")}>
-          <BsSearch size={25} color="white"/>
-        </button>
+        <input type="search" name="" id="" placeholder="Digite o nome de filme que deseja procurar" value={searchString} onChange={(e) => setSearchString(e.target.value)}/>
       </form>
 
       {movies ? 
       <div className={styles.movie_container}>
-        {movies && movies.map((movie,index) => (
+        {filteredData?.map((movie,index) => (
           
           <Link key={index} to={`/detail/${movie.id}`}>
           <div className={styles.movie_item}>
@@ -91,7 +99,7 @@ export function Home() {
               <div className={styles.movie_info}>
                 <div className={styles.container_title}>
                  <h3>{movie.title}</h3>
-                 <Rating defaultValue={Math.round(movie.vote_average)} precision={1} max={10} readOnly emptyIcon={<StarIcon style={{color:"#4F4F4F"}}/>}  />
+                 <Rating value={Math.round(movie.vote_average)} precision={1} max={10} readOnly emptyIcon={<StarIcon style={{color:"#4F4F4F"}}/>}  />
                 </div>
                 <p>Data de lançamento: {formatDate(movie.release_date)}</p>
               </div>

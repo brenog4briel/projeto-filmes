@@ -5,7 +5,8 @@
 }
 .container_back {
     display: flex;
-    padding: 5px 0 25px 100px;
+    justify-content: flex-start;
+    padding: 5px 0 25px 20px;
     cursor: pointer;
 }
 .container_back *:hover {

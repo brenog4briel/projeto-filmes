@@ -2,5 +2,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 120px;
+    height: 100px;
+}
+
+.imagem {
+    height: 100px;
+    width: 100%;
+    align-self: center;
+    justify-self: center
 }
