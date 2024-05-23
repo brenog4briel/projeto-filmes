@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import styles from "./home.module.css"
-import { BsSearch } from "react-icons/bs";
 import {CircularProgress, Rating} from "@mui/material"
 import StarIcon from '@mui/icons-material/Star';
 import { Link } from "react-router-dom";
@@ -34,8 +33,6 @@ export function Home() {
 
   const [movies,setMovies] = useState<MovieProps[]>();
   const [searchString, setSearchString] = useState<string>("");
-  const [searchValue,setSearchValue] = useState<string>("")
-  const [filteredMovies,setFilteredMovies] = useState<MovieProps[]>();
 
   const [page,setPage] = useState(1);
 
