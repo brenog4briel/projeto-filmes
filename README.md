@@ -2,7 +2,7 @@
 ## Sobre o projeto
 
 É um site de exibição de filmes, nas quais são exibidos seus pôsteres e informações técnicas dos filmes, perfeito para amantes do cinema assim como eu.
-
+O projeto se baseia no consumo da API disponibilizada pelo endereço: [https://api.themoviedb.org](https://api.themoviedb.org)
 Link para acessar o projeto: [https://projeto-filmes-seven.vercel.app/](https://projeto-filmes-seven.vercel.app/)
 
 ### Tecnologias
